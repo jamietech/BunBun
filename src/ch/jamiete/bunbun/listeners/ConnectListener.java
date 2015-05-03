@@ -28,6 +28,10 @@ public class ConnectListener extends EventListener {
             }
 
             for (String line : Files.readAllLines(file.toPath())) {
+                if (line.startsWith("*") || line.trim().length() == 0) {
+                    continue;
+                }
+
                 this.getBun().getClient().addChannel(line);
                 attempted++;
             }

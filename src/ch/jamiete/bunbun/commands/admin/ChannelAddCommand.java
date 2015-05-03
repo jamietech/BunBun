@@ -33,7 +33,7 @@ public class ChannelAddCommand extends ChannelCommand {
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("channels.txt", true), "utf-8"));
 
                 out.newLine();
-                out.write("# At the behest of " + user.getNick());
+                out.write("* At the behest of " + user.getNick());
                 out.newLine();
                 out.write(arguments[0]);
 
