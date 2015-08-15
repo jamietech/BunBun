@@ -9,7 +9,7 @@ import ch.jamiete.bunbun.permissions.Flag;
 
 public class AddFlagCommand extends ChannelCommand {
 
-    protected AddFlagCommand(BunBun bun) {
+    public AddFlagCommand(BunBun bun) {
         super(bun);
 
         this.setName("addflag");

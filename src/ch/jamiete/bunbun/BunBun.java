@@ -16,7 +16,11 @@ import ch.jamiete.bunbun.commands.admin.ChannelFlowCommand;
 import ch.jamiete.bunbun.commands.admin.IgnoreCommand;
 import ch.jamiete.bunbun.commands.minecraft.HistoryCommand;
 import ch.jamiete.bunbun.commands.minecraft.UUIDCommand;
+import ch.jamiete.bunbun.commands.superadmin.AddFlagCommand;
+import ch.jamiete.bunbun.commands.superadmin.FlagPermissionsCommand;
+import ch.jamiete.bunbun.commands.superadmin.ListFlagsCommand;
 import ch.jamiete.bunbun.commands.superadmin.ReloadPermissionsCommand;
+import ch.jamiete.bunbun.commands.superadmin.RemoveFlagCommand;
 import ch.jamiete.bunbun.commands.superadmin.ShutdownCommand;
 import ch.jamiete.bunbun.commands.superadmin.ThreadsCommand;
 import ch.jamiete.bunbun.listeners.ConnectListener;
@@ -154,7 +158,11 @@ public class BunBun {
         this.commander.registerChannelCommand(new IgnoreCommand(this));
 
         // Super Administration
+        this.commander.registerChannelCommand(new AddFlagCommand(this));
+        this.commander.registerChannelCommand(new FlagPermissionsCommand(this));
+        this.commander.registerChannelCommand(new ListFlagsCommand(this));
         this.commander.registerChannelCommand(new ReloadPermissionsCommand(this));
+        this.commander.registerChannelCommand(new RemoveFlagCommand(this));
         this.commander.registerChannelCommand(new ShutdownCommand(this));
         this.commander.registerChannelCommand(new ThreadsCommand(this));
 

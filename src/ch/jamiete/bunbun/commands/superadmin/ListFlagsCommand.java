@@ -7,9 +7,9 @@ import ch.jamiete.bunbun.BunBun;
 import ch.jamiete.bunbun.command.ChannelCommand;
 import ch.jamiete.bunbun.permissions.PermissionFlag;
 
-public class ListFlags extends ChannelCommand {
+public class ListFlagsCommand extends ChannelCommand {
 
-    protected ListFlags(BunBun bun) {
+    public ListFlagsCommand(BunBun bun) {
         super(bun);
 
         this.setName("listflags");

@@ -8,9 +8,9 @@ import ch.jamiete.bunbun.command.ChannelCommand;
 import ch.jamiete.bunbun.permissions.Flag;
 import ch.jamiete.bunbun.permissions.PermissionFlag;
 
-public class FlagPermissions extends ChannelCommand {
+public class FlagPermissionsCommand extends ChannelCommand {
 
-    protected FlagPermissions(BunBun bun) {
+    public FlagPermissionsCommand(BunBun bun) {
         super(bun);
 
         this.setName("flagpermissions");

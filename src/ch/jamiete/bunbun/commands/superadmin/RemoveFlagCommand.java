@@ -7,9 +7,9 @@ import ch.jamiete.bunbun.BunBun;
 import ch.jamiete.bunbun.command.ChannelCommand;
 import ch.jamiete.bunbun.permissions.Flag;
 
-public class RemoveFlag extends ChannelCommand {
+public class RemoveFlagCommand extends ChannelCommand {
 
-    protected RemoveFlag(BunBun bun) {
+    public RemoveFlagCommand(BunBun bun) {
         super(bun);
 
         this.setName("removeflag");
