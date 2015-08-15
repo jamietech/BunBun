@@ -91,12 +91,12 @@ public class Start {
                 if (Start.this.username != null && Start.this.password != null) {
                     if (Start.this.authtype.equalsIgnoreCase("GameSurge")) {
                         client.getAuthManager().addProtocol(new GameSurge(client, Start.this.username, Start.this.password));
-                        BunBun.getLogger().fine("Added GameSurge authentication protocol");
+                        BunBun.getLogger().info("Added GameSurge authentication protocol");
                     }
 
                     if (Start.this.authtype.equalsIgnoreCase("NickServ")) {
                         client.getAuthManager().addProtocol(new NickServ(client, Start.this.username, Start.this.password));
-                        BunBun.getLogger().fine("Added NickServ authentication protocol");
+                        BunBun.getLogger().info("Added NickServ authentication protocol");
                     }
                 }
             }
