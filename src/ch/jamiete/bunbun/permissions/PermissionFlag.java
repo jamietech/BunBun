@@ -80,4 +80,8 @@ public class PermissionFlag {
         return grants.toArray(new String[grants.size()]);
     }
 
+    public String[] getExclusions() {
+        return exclusions.toArray(new String[exclusions.size()]);
+    }
+
 }

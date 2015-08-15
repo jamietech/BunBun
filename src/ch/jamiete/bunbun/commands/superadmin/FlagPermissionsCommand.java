@@ -39,8 +39,11 @@ public class FlagPermissionsCommand extends ChannelCommand {
             permissions.append(permission + ", ");
         }
 
+        for (String permission : flag.getExclusions()) {
+            permissions.append("-" + permission + ", ");
+        }
+
         permissions.setLength(permissions.length() - 2);
         this.reply(user, channel, permissions.toString());
     }
-
 }
