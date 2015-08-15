@@ -14,20 +14,31 @@ public class ListFlagsCommand extends ChannelCommand {
 
         this.setName("listflags");
         this.setAliases(Arrays.asList(new String[] { "flaglist", "flagslist" }));
-        this.setDescription("Lists available flags.");
+        this.setDescription("Lists the flags a user has or all flags registered.");
         this.setPermission("superadmin.listflags");
         this.setSilent(true);
     }
 
     @Override
     public void execute(User user, Channel channel, String[] arguments, String label) {
-        StringBuilder flags = new StringBuilder();
+        if (arguments.length == 1) {
+            User test = this.bun.findUserPartial(arguments[0]);
 
-        for (PermissionFlag flag : this.bun.getPermissionManager().getFlags()) {
-            flags.append(flag.getFlag().getChar());
+            if (test == null) {
+                this.reply(user, channel, "Couldn't find that user.");
+                return;
+            }
+
+            this.reply(user, channel, this.bun.getPermissionManager().getUser(test).getFlagList());
+        } else {
+            StringBuilder flags = new StringBuilder();
+
+            for (PermissionFlag flag : this.bun.getPermissionManager().getFlags()) {
+                flags.append(flag.getFlag().getChar());
+            }
+
+            this.reply(user, channel, flags.toString());
         }
-
-        this.reply(user, channel, flags.toString());
     }
 
 }
