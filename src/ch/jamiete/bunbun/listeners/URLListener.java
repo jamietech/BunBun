@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.kitteh.irc.client.library.Client;
+import org.kitteh.irc.client.library.IRCFormat;
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
 import org.kitteh.irc.client.library.event.abstractbase.ChannelEventBase;
@@ -52,7 +53,7 @@ public class URLListener extends EventListener {
 
         try {
             String title = TitleExtractor.getPageTitle(event.getUrlString());
-            event.getChannel().sendMessage(title);
+            event.getChannel().sendMessage(IRCFormat.BOLD + "Title: " + IRCFormat.RESET + title);
         } catch (IOException e) {
             //
         }
