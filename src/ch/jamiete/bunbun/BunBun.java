@@ -20,6 +20,7 @@ import ch.jamiete.bunbun.commands.superadmin.ShutdownCommand;
 import ch.jamiete.bunbun.commands.superadmin.ThreadsCommand;
 import ch.jamiete.bunbun.listeners.ConnectListener;
 import ch.jamiete.bunbun.listeners.LogListener;
+import ch.jamiete.bunbun.listeners.URLListener;
 import ch.jamiete.bunbun.permissions.PermissionListener;
 import ch.jamiete.bunbun.permissions.PermissionManager;
 import com.google.gson.Gson;
@@ -118,6 +119,7 @@ public class BunBun {
 
         new ConnectListener(this);
         new LogListener(this);
+        new URLListener(this);
     }
 
 }
