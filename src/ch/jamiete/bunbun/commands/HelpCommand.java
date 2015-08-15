@@ -31,7 +31,7 @@ public class HelpCommand extends ChannelCommand {
                     StringBuilder reply = new StringBuilder();
                     reply.append(IRCFormat.BOLD).append(CommandManager.PREFIX).append(command.getName()).append(IRCFormat.RESET);
 
-                    if (!command.getAliases().isEmpty()) {
+                    if (command.getAliases() != null && !command.getAliases().isEmpty()) {
                         StringBuilder aliases = new StringBuilder();
 
                         for (String alias : command.getAliases()) {
