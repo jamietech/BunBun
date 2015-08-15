@@ -40,7 +40,6 @@ public class TF2Command extends ChannelCommand {
                 }
             }
 
-            this.reply(user, channel, "Pinging " + arguments_sub[0] + " : " + port);
             new TF2ServerInfoFetcher(this, user, channel, arguments_sub[0], port).start();
         }
     }
