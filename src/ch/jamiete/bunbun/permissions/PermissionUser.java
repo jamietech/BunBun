@@ -94,11 +94,12 @@ public class PermissionUser {
     }
 
     public void write(BunBun bun) {
-        if (this.getFlags().length == 1) {
-            return; // Only has default flag
-        }
-
         File file = new File(bun.getPermissionManager().getPath(user));
+
+        if (file.exists() && this.getFlags().length == 1) {
+            file.delete();
+            BunBun.getLogger().info("Pruned permission file for " + bun.getFullUser(user));
+        }
 
         try {
             if (!file.exists()) {
