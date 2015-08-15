@@ -6,7 +6,7 @@ import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
 public class LogFormat extends Formatter {
-    private final SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD kk:mm:ss");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd kk:mm:ss");
 
     @Override
     public String format(LogRecord record) {
