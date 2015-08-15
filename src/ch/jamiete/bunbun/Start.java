@@ -49,6 +49,7 @@ public class Start {
         BunBun.getLogger().setUseParentHandlers(false);
         ConsoleHandler handler = new ConsoleHandler();
         handler.setFormatter(new LogFormat());
+        BunBun.getLogger().addHandler(handler);
 
         if (debug) {
             handler.setLevel(Level.FINE);
@@ -56,7 +57,6 @@ public class Start {
             BunBun.getLogger().fine("Debug enabled.");
         }
 
-        BunBun.getLogger().addHandler(handler);
         BunBun.getLogger().info("Connecting to " + this.network + ":" + this.port + "...");
 
         final ClientBuilder builder = Client.builder();
