@@ -7,6 +7,7 @@ import org.kitteh.irc.client.library.Client;
 import org.kitteh.irc.client.library.ClientBuilder;
 import org.kitteh.irc.client.library.auth.protocol.GameSurge;
 import org.kitteh.irc.client.library.auth.protocol.NickServ;
+import ch.jamiete.bunbun.listeners.YouTubeListener;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
@@ -38,6 +39,9 @@ public class Start {
 
     @Parameter(names = { "-debug" }, description = "Verbose output?")
     private boolean debug = false;
+
+    @Parameter(names = { "-youtube" }, description = "YouTube API key")
+    private String youtube_key;
 
     public void start(final String[] args) {
         new JCommander(this, args);
@@ -106,5 +110,8 @@ public class Start {
         });
 
         new BunBun(builder.build()).prepare();
+
+        // Command-line configuration
+        YouTubeListener.KEY = this.youtube_key;
     }
 }
