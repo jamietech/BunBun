@@ -18,15 +18,21 @@ public class ShutdownCommand extends ChannelCommand {
 
     @Override
     public void execute(User user, Channel channel, String[] arguments, String label) {
-        String message = "Shutting down at behest of " + user.getNick();
-        BunBun.getLogger().info(message);
+        String message = "Bye! (" + user.getNick() + ")";
+        String provided = null;
 
         if (arguments.length > 0) {
             if (arguments[0].equals("OVERRIDE")) {
-                message = this.bun.combineSplit(1, arguments, " ");
+                provided = message = this.bun.combineSplit(1, arguments, " ");
             } else {
-                message = message + " ัส" + this.bun.combineSplit(0, arguments, " ");
+                provided = message = this.bun.combineSplit(0, arguments, " ");
+                message += " (" + user.getNick() + ")";
             }
+        }
+
+        BunBun.getLogger().info("Shutting down by " + this.bun.getFullUser(user) + "...");
+        if (provided != null) {
+            BunBun.getLogger().info("-> " + provided);
         }
 
         this.bun.getClient().shutdown(message);
