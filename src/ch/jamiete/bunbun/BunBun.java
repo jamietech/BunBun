@@ -11,6 +11,7 @@ import ch.jamiete.bunbun.commands.HelpCommand;
 import ch.jamiete.bunbun.commands.PermTestCommand;
 import ch.jamiete.bunbun.commands.PingCommand;
 import ch.jamiete.bunbun.commands.TF2Command;
+import ch.jamiete.bunbun.commands.UrbanCommand;
 import ch.jamiete.bunbun.commands.admin.ChannelAddCommand;
 import ch.jamiete.bunbun.commands.admin.ChannelFlowCommand;
 import ch.jamiete.bunbun.commands.admin.IgnoreCommand;
@@ -148,6 +149,7 @@ public class BunBun {
         this.commander.registerChannelCommand(new PingCommand(this));
         this.commander.registerChannelCommand(new PermTestCommand(this));
         this.commander.registerChannelCommand(new TF2Command(this));
+        this.commander.registerChannelCommand(new UrbanCommand(this));
 
         // Minecraft
         this.commander.registerChannelCommand(new UUIDCommand(this));
