@@ -106,10 +106,8 @@ public class TF2Command extends ChannelCommand {
                 //info.network_version = (String) map.get("networkVersion");
                 info.server_name = (String) map.get("serverName");
                 info.map_name = (String) map.get("mapName");
-                info.players = Integer.valueOf(String.valueOf(map.get("numberOfPlayers")));
-                info.max_players = Integer.valueOf(String.valueOf(map.get("maxPlayers")));
-                //info.players = (int) map.get("numberofPlayers");
-                //info.max_players = (int) map.get("maxPlayers");
+                info.players = (int) map.get("numberofPlayers");
+                info.max_players = (int) map.get("maxPlayers");
                 info.password = (boolean) map.get("passwordProtected");
                 info.secure = (boolean) map.get("secure");
 
