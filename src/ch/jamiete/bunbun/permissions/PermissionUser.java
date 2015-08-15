@@ -98,7 +98,7 @@ public class PermissionUser {
 
         if (file.exists() && this.getFlags().length == 1) {
             file.delete();
-            BunBun.getLogger().info("Pruned permission file for " + bun.getFullUser(user));
+            BunBun.getLogger().info("Pruned permission file for " + bun.getPermissionManager().getPath(user));
         }
 
         try {
