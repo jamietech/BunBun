@@ -21,7 +21,7 @@ public class HelpCommand extends ChannelCommand {
     public void execute(User user, Channel channel, String[] arguments, String label) {
         if (arguments.length == 1) {
             ChannelCommand command = this.bun.getCommandManager().getChannelCommand(arguments[0]);
-            
+
             if (command == null) {
                 this.reply(user, channel, "That's not a command. Try " + CommandManager.PREFIX + label + " to list commands.");
             } else {
@@ -30,6 +30,18 @@ public class HelpCommand extends ChannelCommand {
                 } else {
                     StringBuilder reply = new StringBuilder();
                     reply.append(IRCFormat.BOLD).append(CommandManager.PREFIX).append(command.getName()).append(IRCFormat.RESET);
+
+                    if (!command.getAliases().isEmpty()) {
+                        StringBuilder aliases = new StringBuilder();
+
+                        for (String alias : command.getAliases()) {
+                            aliases.append(alias).append(", ");
+                        }
+
+                        aliases.setLength(aliases.length() - 2);
+                        reply.append("(").append(aliases.toString()).append(")");
+                    }
+
                     reply.append(" Ñ ");
 
                     if (command.getDescription() != null && !command.getDescription().trim().equals("")) {
