@@ -16,7 +16,8 @@ public class ConnectListener extends EventListener {
 
     @Handler
     public void onConnect(ClientConnectedEvent event) {
-        BunBun.getLogger().info("Connected! Attempting to join channels...");
+        BunBun.getLogger().info("Connected to server!");
+        BunBun.getLogger().info(" Attempting to join channels...");
 
         File file = new File("channels.txt");
         int attempted = 0;

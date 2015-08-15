@@ -22,11 +22,13 @@ public class PermissionManager {
      * <b>Only call from ReloadPermissionCommand.</b>
      */
     public void init() {
+        BunBun.getLogger().info("Initialising permissions...");
+
         this.flags = new LinkedHashSet<PermissionFlag>();
         this.users = new LinkedHashSet<PermissionUser>();
 
         for (Flag flag : Flag.getFlags()) {
-            BunBun.getLogger().info("Creating flag " + flag.getChar());
+            BunBun.getLogger().info("Creating flag " + flag.getChar() + "...");
 
             File file = new File(flag.getChar() + ".flag");
 
@@ -36,7 +38,7 @@ public class PermissionManager {
 
             flags.add(new PermissionFlag(flag));
 
-            BunBun.getLogger().info("Done!");
+            BunBun.getLogger().info("Permissions intialised.");
         }
     }
 

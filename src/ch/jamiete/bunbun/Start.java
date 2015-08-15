@@ -51,7 +51,7 @@ public class Start {
             BunBun.getLogger().setLevel(Level.FINE);
         }
 
-        BunBun.getLogger().info("Connecting to " + this.network + ":" + this.port);
+        BunBun.getLogger().info("Connecting to " + this.network + ":" + this.port + "...");
 
         final ClientBuilder builder = Client.builder();
 
