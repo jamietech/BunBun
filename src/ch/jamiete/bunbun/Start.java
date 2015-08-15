@@ -37,7 +37,7 @@ public class Start {
     private String authtype;
 
     @Parameter(names = { "-debug" }, description = "Verbose output?")
-    private final boolean debug = false;
+    private boolean debug = false;
 
     public void start(final String[] args) {
         new JCommander(this, args);
@@ -45,12 +45,14 @@ public class Start {
         BunBun.getLogger().setUseParentHandlers(false);
         ConsoleHandler handler = new ConsoleHandler();
         handler.setFormatter(new LogFormat());
-        BunBun.getLogger().addHandler(handler);
 
         if (debug) {
+            handler.setLevel(Level.FINE);
             BunBun.getLogger().setLevel(Level.FINE);
+            BunBun.getLogger().fine("Debug enabled.");
         }
 
+        BunBun.getLogger().addHandler(handler);
         BunBun.getLogger().info("Connecting to " + this.network + ":" + this.port + "...");
 
         final ClientBuilder builder = Client.builder();
