@@ -112,6 +112,9 @@ public class CommandManager extends EventListener {
 
     @Handler
     public void onChannelMessage(final ChannelMessageEvent event) {
+        long start = System.currentTimeMillis();
+        BunBun.getLogger().fine("Executing command " + event.getMessage() + " by " + this.getBun().getFullUser(event.getActor()) + "...");
+
         if (this.quiet.contains(event.getChannel().getName().toLowerCase()) || this.isIgnored(event.getActor())) {
             return;
         }
@@ -181,6 +184,8 @@ public class CommandManager extends EventListener {
                 this.getBun().getClient().sendMessage("#jamietech", "Exception occured while processing " + args[0] + " from " + event.getActor().toString());
             }
         }
+
+        BunBun.getLogger().fine("Finished command execution in " + (System.currentTimeMillis() - start) + "ms");
     }
 
     @Handler
