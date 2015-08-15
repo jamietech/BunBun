@@ -1,10 +1,6 @@
 package ch.jamiete.bunbun.permissions;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.kitteh.irc.client.library.element.User;
@@ -13,9 +9,11 @@ import ch.jamiete.bunbun.BunBun;
 public class PermissionManager {
     private Set<PermissionFlag> flags;
     private Set<PermissionUser> users;
+    private BunBun bun;
 
-    public PermissionManager() {
+    public PermissionManager(BunBun bun) {
         this.init();
+        this.bun = bun;
     }
 
     /**
@@ -42,6 +40,14 @@ public class PermissionManager {
         }
     }
 
+    public String getPath(User user) {
+        return user.getNick() + "@" + user.getHost().replaceAll(":", "-");
+    }
+
+    public PermissionFlag[] getFlags() {
+        return this.flags.toArray(new PermissionFlag[this.flags.size()]);
+    }
+
     public void track(User user) {
         if (isTracked(user)) {
             return;
@@ -50,30 +56,11 @@ public class PermissionManager {
         PermissionUser puser = new PermissionUser(user);
         puser.addFlag(this.getFlag(Flag.DEFAULT));
 
-        File file = new File(user.getNick() + "@" + user.getHost().replaceAll(":", "-"));
-
-        if (file.exists()) {
-            String[] flags = null;
-
-            try {
-                BufferedReader in = new BufferedReader(new FileReader(file));
-                flags = in.readLine().split("");
-                in.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("Failed to read user flag file " + file.getName());
-            }
-
-            for (String bit : flags) {
-                puser.addFlag(this.getFlag(Flag.byChar(bit.toCharArray()[0])));
-            }
-        }
+        puser.read(this.bun);
 
         this.users.add(puser);
 
-        BunBun.getLogger().info("Began tracking permissions for " + file.getName() + ": " + puser.getFlagList());
+        BunBun.getLogger().info("Began tracking permissions for " + this.getPath(user) + ": " + puser.getFlagList());
     }
 
     public void untrack(User user) {

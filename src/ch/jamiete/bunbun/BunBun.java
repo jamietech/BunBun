@@ -1,5 +1,6 @@
 package ch.jamiete.bunbun;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.kitteh.irc.client.library.Client;
 import org.kitteh.irc.client.library.element.Channel;
@@ -28,7 +29,7 @@ import com.google.gson.Gson;
 public class BunBun {
     private final Client client;
     private static final Logger LOGGER = Logger.getLogger("BunBun");
-    private final PermissionManager permissions = new PermissionManager();
+    private final PermissionManager permissions = new PermissionManager(this);
     private final CommandManager commander;
     private final Gson gson = new Gson();
 
@@ -62,6 +63,12 @@ public class BunBun {
         return this.client;
     }
 
+    /**
+     * Searches the channels BunBun is on for a user with the exact name provided. <br>
+     * If no matches are found null is returned.
+     * @param name
+     * @return
+     */
     public User findUser(String name) {
         for (Channel channel : this.getClient().getChannels()) {
             for (User user : channel.getUsers()) {
@@ -72,6 +79,40 @@ public class BunBun {
         }
 
         return null;
+    }
+
+    /**
+     * Searches the channels BunBun is on for a user starting with the String provided. <br>
+     * If multiple results are found null is returned. <br>
+     * If no matches are found null is returned.
+     * @param name
+     * @return
+     */
+    public User findUserPartial(String name) {
+        ArrayList<User> matches = new ArrayList<User>();
+
+        for (Channel channel : this.getClient().getChannels()) {
+            for (User user : channel.getUsers()) {
+                if (user.getNick().toLowerCase().startsWith(name.toLowerCase())) {
+                    matches.add(user);
+                }
+            }
+        }
+
+        if (matches.size() == 1) {
+            return matches.get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns a *!*@* representation of the user.
+     * @param user
+     * @return
+     */
+    public String getFullUser(User user) {
+        return user.getNick() + "!" + user.getUserString() + "@" + user.getHost();
     }
 
     public void notifyException(Exception e, Channel channel, User user, String label) {
