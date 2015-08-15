@@ -39,7 +39,7 @@ public class HelpCommand extends ChannelCommand {
                         }
 
                         aliases.setLength(aliases.length() - 2);
-                        reply.append("(").append(aliases.toString()).append(")");
+                        reply.append(" (").append(aliases.toString()).append(")");
                     }
 
                     reply.append(" Ñ ");
