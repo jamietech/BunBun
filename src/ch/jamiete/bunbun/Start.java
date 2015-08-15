@@ -3,8 +3,10 @@ package ch.jamiete.bunbun;
 import java.util.function.Consumer;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
-import org.kitteh.irc.client.library.AuthType;
+import org.kitteh.irc.client.library.Client;
 import org.kitteh.irc.client.library.ClientBuilder;
+import org.kitteh.irc.client.library.auth.protocol.GameSurge;
+import org.kitteh.irc.client.library.auth.protocol.NickServ;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
@@ -25,11 +27,14 @@ public class Start {
     @Parameter(names = { "-spass", "-serverpassword", "-sp" }, description = "IRC server password")
     private String server_password;
 
-    @Parameter(names = { "-user", "-username", "-u" }, description = "NickServ account to auth to")
+    @Parameter(names = { "-user", "-username", "-u" }, description = "Account to auth to")
     private String username;
 
-    @Parameter(names = { "-pass", "-password" }, description = "NickServ account password")
+    @Parameter(names = { "-pass", "-password" }, description = "Auth account password")
     private String password;
+
+    @Parameter(names = { "-auth", "-authtype", "-a" }, description = "Auth service (GameSurge/NickServ)")
+    private String authtype;
 
     @Parameter(names = { "-debug" }, description = "Verbose output?")
     private final boolean debug = false;
@@ -48,7 +53,8 @@ public class Start {
 
         BunBun.getLogger().info("Connecting to " + this.network + ":" + this.port);
 
-        final ClientBuilder builder = new ClientBuilder();
+        final ClientBuilder builder = Client.builder();
+
         builder.name("BunBun").nick("BunBun").user("BunBun");
         builder.realName("BunBun — jamietech’s IRC bot : #jamietech ABUSE/COMPLAINTS");
         builder.server(this.network).server(this.port);
@@ -58,10 +64,6 @@ public class Start {
 
         if (this.server_password != null) {
             builder.serverPassword(this.server_password);
-        }
-
-        if (this.username != null && this.password != null) {
-            builder.auth(AuthType.NICKSERV, this.username, this.password);
         }
 
         builder.listenInput(new Consumer<String>() {
@@ -82,7 +84,25 @@ public class Start {
 
         });
 
+        builder.after(new Consumer<Client>() {
+
+            @Override
+            public void accept(Client client) {
+                if (Start.this.username != null && Start.this.password != null) {
+                    if (Start.this.authtype.equalsIgnoreCase("GameSurge")) {
+                        client.getAuthManager().addProtocol(new GameSurge(client, Start.this.username, Start.this.password));
+                        BunBun.getLogger().fine("Added GameSurge authentication protocol");
+                    }
+
+                    if (Start.this.authtype.equalsIgnoreCase("NickServ")) {
+                        client.getAuthManager().addProtocol(new NickServ(client, Start.this.username, Start.this.password));
+                        BunBun.getLogger().fine("Added NickServ authentication protocol");
+                    }
+                }
+            }
+
+        });
+
         new BunBun(builder.build()).prepare();
     }
-
 }

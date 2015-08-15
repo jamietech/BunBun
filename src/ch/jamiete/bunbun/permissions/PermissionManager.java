@@ -48,8 +48,8 @@ public class PermissionManager {
         PermissionUser puser = new PermissionUser(user);
         puser.addFlag(this.getFlag(Flag.DEFAULT));
 
-        File file = new File(user.getUser() + "@" + user.getHost().replaceAll(":", "-"));
-        
+        File file = new File(user.getNick() + "@" + user.getHost().replaceAll(":", "-"));
+
         if (file.exists()) {
             String[] flags = null;
 
