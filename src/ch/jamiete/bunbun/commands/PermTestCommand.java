@@ -20,13 +20,6 @@ public class PermTestCommand extends ChannelCommand {
 
     @Override
     public void execute(User user, Channel channel, String[] arguments, String label) {
-
-        String test = "";
-        for (String s : arguments) {
-            test += s + " ";
-        }
-        BunBun.getLogger().info(test);
-
         if (arguments.length == 0 || arguments.length > 2) {
             String params = "<permission>";
 
