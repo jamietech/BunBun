@@ -42,6 +42,11 @@ public class SeenCommand extends ChannelCommand {
             return;
         }
 
+        if (arguments[0].equalsIgnoreCase(user.getNick())) {
+            this.reply(user, channel, "That's you!");
+            return;
+        }
+
         StringBuilder response = new StringBuilder();
         response.append("I last saw ").append(seen.nickname).append(" ");
 
@@ -82,6 +87,7 @@ public class SeenCommand extends ChannelCommand {
         }
 
         response.append(" about ").append(timeago.timeAgo(seen.time));
+        this.reply(user, channel, response.toString());
     }
 
     @Handler
