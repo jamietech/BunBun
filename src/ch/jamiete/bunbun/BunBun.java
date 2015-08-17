@@ -10,6 +10,7 @@ import ch.jamiete.bunbun.commands.GeoIPCommand;
 import ch.jamiete.bunbun.commands.HelpCommand;
 import ch.jamiete.bunbun.commands.PermTestCommand;
 import ch.jamiete.bunbun.commands.PingCommand;
+import ch.jamiete.bunbun.commands.SeenCommand;
 import ch.jamiete.bunbun.commands.TF2Command;
 import ch.jamiete.bunbun.commands.UrbanCommand;
 import ch.jamiete.bunbun.commands.admin.ChannelAddCommand;
@@ -148,6 +149,7 @@ public class BunBun {
         this.commander.registerChannelCommand(new HelpCommand(this));
         this.commander.registerChannelCommand(new PingCommand(this));
         this.commander.registerChannelCommand(new PermTestCommand(this));
+        this.commander.registerChannelCommand(new SeenCommand(this));
         this.commander.registerChannelCommand(new TF2Command(this));
         this.commander.registerChannelCommand(new UrbanCommand(this));
 
