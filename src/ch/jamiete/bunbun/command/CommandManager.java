@@ -221,6 +221,7 @@ public class CommandManager extends EventListener {
         }
 
         this.channelcommands.add(command);
+        BunBun.getLogger().info("Registered channel command " + command.getName() + (command.getAliases() != null ? this.getBun().combineSplit(0, command.getAliases().toArray(new String[command.getAliases().size()]), ", ") : ""));
     }
 
     public void registerPrivateCommand(final PrivateCommand command) {
@@ -233,6 +234,7 @@ public class CommandManager extends EventListener {
         }
 
         this.privatecommands.add(command);
+        BunBun.getLogger().info("Registered private command " + command.getName() + (command.getAliases() != null ? this.getBun().combineSplit(0, command.getAliases().toArray(new String[command.getAliases().size()]), ", ") : ""));
     }
 
 }
