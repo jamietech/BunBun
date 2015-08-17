@@ -23,7 +23,7 @@ public class FlagPermissionsCommand extends ChannelCommand {
     @Override
     public void execute(User user, Channel channel, String[] arguments, String label) {
         if (arguments.length != 1) {
-            this.usage(user, channel, "<flag>");
+            this.usage(user, channel, "<flag>", label);
             return;
         }
 

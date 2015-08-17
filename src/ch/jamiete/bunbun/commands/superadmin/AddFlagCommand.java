@@ -22,7 +22,7 @@ public class AddFlagCommand extends ChannelCommand {
     @Override
     public void execute(User user, Channel channel, String[] arguments, String label) {
         if (arguments.length != 2) {
-            this.usage(user, channel, "<user> <flag>");
+            this.usage(user, channel, "<user> <flag>", label);
         } else {
             User modify = this.bun.findUserPartial(arguments[0]);
             if (modify == null) {

@@ -45,7 +45,7 @@ public class ChannelAddCommand extends ChannelCommand {
 
             this.reply(user, channel, "Done!");
         } else {
-            this.usage(user, channel, "<channel>");
+            this.usage(user, channel, "<channel>", label);
         }
     }
 }
