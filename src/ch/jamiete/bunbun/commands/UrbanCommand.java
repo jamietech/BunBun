@@ -47,7 +47,7 @@ public class UrbanCommand extends ChannelCommand implements URLFetcherCallback {
         StringBuilder message = new StringBuilder();
 
         message.append(IRCFormat.BOLD).append(word.word).append(": ").append(IRCFormat.RESET);
-        message.append(word.definition.replace("\r\n", " ").replace("\r", " ").replace("\n", " "));
+        message.append(word.definition.replace("\r\n", " ").replace("\r", " ").replace("\n", " ").replace("\0", ""));
 
         message.append("\n").append(IRCFormat.BOLD).append("Example: ").append(IRCFormat.RESET);
         message.append(word.example);
