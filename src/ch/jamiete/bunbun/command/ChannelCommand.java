@@ -17,6 +17,10 @@ public abstract class ChannelCommand extends GenericCommand {
     }
 
     protected void usage(User user, Channel channel, String params) {
+        if (this.getAliases() != null) {
+            BunBun.getLogger().warning(this.getName() + " has aliases but called #usage without providing the label called.");
+        }
+
         this.usage(user, channel, params, this.getName());
     }
 
