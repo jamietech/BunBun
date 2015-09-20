@@ -137,13 +137,20 @@ public class CommandManager extends EventListener {
 
                 if (chan_starts) {
                     String search = args[0].substring(1);
+                    boolean found = false;
 
                     for (Channel c : this.getBun().getClient().getChannels()) {
                         if (c.getName().equalsIgnoreCase(search)) {
                             channel = c;
                             args = Arrays.copyOfRange(args, 1, args.length);
+                            found = true;
                             break;
                         }
+                    }
+
+                    if (!found) {
+                        event.getActor().sendNotice("I'm not on that channel. Aborting command performance.");
+                        return;
                     }
                 }
             }
